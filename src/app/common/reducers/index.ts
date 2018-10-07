@@ -1,0 +1,123 @@
+import { environment } from './../../../environments/environment';
+import { AppState } from './index';
+import { CourseState } from './../../course/course.reducer';
+import { StoreModule, ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { Params, RouterStateSnapshot } from '@angular/router';
+import { compose } from '@ngrx/store';
+import { ActionReducer, combineReducers } from '@ngrx/store';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { storeLogger } from 'ngrx-store-logger';
+import { routerReducer, RouterReducerState, RouterStateSerializer } from '@ngrx/router-store';
+
+import { userReducer, UserState } from '../../user/user.reducer';
+import { commonReducer, CommonState } from './common.reducer';
+import { moduleReducer, ModuleState } from '../../module/module.reducer';
+import { courseReducer } from '../../course/course.reducer';
+import { subjectReducer, SubjectState } from '../../subject/subject.reducer';
+import { sessionReducer, SessionState } from './session.reducer';
+
+export interface RouterStateUrl {
+    url: string;
+    params: Params;
+    queryParams: Params;
+}
+
+const modules = {
+    'router': routerReducer,
+    'user': userReducer,
+    'common': commonReducer,
+    'module': moduleReducer,
+    'course': courseReducer,
+    'subject': subjectReducer,
+    'session': sessionReducer
+};
+
+export interface AppState {
+    router: RouterReducerState<RouterStateUrl>;
+    user: UserState;
+    common: CommonState;
+    module: ModuleState;
+    course: CourseState;
+    subject: SubjectState;
+    session: SessionState;
+}
+
+export const syncReducers = {
+    router: routerReducer,
+    user: userReducer,
+    common: commonReducer,
+    module: moduleReducer,
+    course: courseReducer,
+    subject: subjectReducer,
+    session: sessionReducer
+};
+
+export class CustomSerializer implements RouterStateSerializer<RouterStateUrl> {
+    serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+        let route = routerState.root;
+        while (route.firstChild) {
+            route = route.firstChild;
+        }
+
+        const { url } = routerState;
+        const queryParams = routerState.root.queryParams;
+        const params = route.params;
+
+        // Only return an object including the URL, params and query params
+        // instead of the entire snapshot
+        return { url, params, queryParams };
+    }
+}
+
+const deepCombineReducers = (allReducers: any) => {
+    Object.getOwnPropertyNames(allReducers).forEach((prop) => {
+        if (allReducers.hasOwnProperty(prop)
+            && allReducers[prop] !== null
+            && typeof allReducers[prop] !== 'function') {
+            allReducers[prop] = deepCombineReducers(allReducers[prop]);
+        }
+    });
+    return combineReducers(allReducers);
+};
+
+const createReducer = (asyncReducers = {}) => {
+    const allReducers = { ...syncReducers, ...asyncReducers };
+    return deepCombineReducers(allReducers);
+};
+
+// Generate a reducer to set the root state in dev mode for HMR
+function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
+    return function (state: any, action: any) {
+        if (action.type === 'SET_ROOT_STATE') {
+            return action.payload;
+        }
+        return reducer(state, action);
+    };
+}
+
+function logout(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+    return function (state: AppState, action: any): AppState {
+        if (action.type === '[User] Logout Success') {
+            state = undefined;
+        }
+        return reducer(state, action);
+    };
+}
+
+export function resetOnLogout(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+    return function (state, action) {
+        let newState;
+        if (action.type === '[User] Logout Success') {
+            newState = Object.assign({}, state);
+            Object.keys(modules).forEach((key) => {
+                newState[key] = modules[key]['initialState'];
+            });
+        }
+        return reducer(newState || state, action);
+    };
+}
+
+export const metaReducers: MetaReducer<AppState>[] = !environment.production
+  ? [storeLogger(), storeFreeze]
+  : [];
+

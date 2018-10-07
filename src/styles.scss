@@ -1,0 +1,414 @@
+/* styles.css will be extracted to main dist folder and is imported in index.html */
+/* This file is for importing 3rd party styles  */
+@import './app/sass/variables.scss';
+@import './assets/styles/toastr.scss';
+@import './assets/styles/quill.snow.scss';
+
+@media only screen and (min-width: 800px) {
+  md-sidenav.mat-sidenav-opened, md-sidenav.mat-sidenav-opening {
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.08),0px 1px 1px 0px rgba(0, 0, 0, 0.07),0px 1px 3px 0px rgba(0, 0, 0, 0.14) !important;
+  }
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: $primary-font;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px; 
+}
+
+pre {
+  font-family: $primary-font;
+  font-size: 14px;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+/**
+  * Basic styles from Material Design Lite for HTML elements
+  */
+  h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0; }
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  font-family: $primary-font;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  opacity: 0.54;
+  font-size: 0.6em; }
+
+h1 {
+  font-family: $primary-font;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-top: 24px;
+  margin-bottom: 24px; }
+
+h2 {
+  font-family: $primary-font;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 48px;
+  margin-top: 24px;
+  margin-bottom: 24px; }
+
+h3 {
+  font-family: $primary-font;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 40px;
+  margin-top: 24px;
+  margin-bottom: 24px; }
+
+h4 {
+  font-family: $primary-font;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 24px;
+  margin-bottom: 16px; }
+
+h5 {
+  font-family: $primary-font;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin-top: 24px;
+  margin-bottom: 16px; }
+
+h6 {
+  font-family: $primary-font;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  margin-top: 24px;
+  margin-bottom: 16px; }
+
+p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  margin-bottom: 0; }
+
+a {
+  font-weight: 500; }
+
+blockquote {
+  font-family: $primary-font;
+  position: relative;
+  font-size: 24px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: 0.08em; }
+  blockquote:before {
+    position: absolute;
+    left: -0.5em;
+    content: '“'; }
+  blockquote:after {
+    content: '”';
+    margin-left: -0.05em; }
+
+mark {
+  background-color: #f4ff81; }
+
+dt {
+  font-weight: 700; }
+
+address {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  font-style: normal; }
+
+ul, ol {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0; }
+
+
+
+  
+// Here is where the magic happens
+
+$offset: 187;
+$duration: 1.4s;
+
+.spinner {
+  animation: rotator $duration linear infinite;
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+.path {
+  stroke-dasharray: $offset;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation:
+    dash $duration ease-in-out infinite, 
+    colors ($duration*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+	0% { stroke: #4285F4; }
+	25% { stroke: #DE3E35; }
+	50% { stroke: #F7C223; }
+	75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+ 0% { stroke-dashoffset: $offset; }
+ 50% {
+   stroke-dashoffset: $offset/4;
+   transform:rotate(135deg);
+ }
+ 100% {
+   stroke-dashoffset: $offset;
+   transform:rotate(450deg);
+ }
+}
+
+
+
+
+body {
+    background-color: #000;
+}
+hr {
+    display: block;
+    margin: 10px 0 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, .12);
+    width: 100%
+}
+
+.company-name {
+    margin-right: 20px;
+}
+.layout {
+    min-height: 100%;
+    position: relative;
+}
+.main-content {
+    padding-bottom: 100px;
+}
+.auth {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .auth-container {
+        width: 450px;
+        min-height: 330px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+    }
+}
+
+.full-width { 
+    width: 100%;
+}
+
+.martop-10 {
+    margin-top: 10px;
+}
+.martop-20 {
+    margin-top: 20px;
+}
+.mt-10 {
+    margin-top: 10px;
+}
+.mt-20 {
+    margin-top: 20px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mb-40 {
+    margin-bottom: 40px;
+}
+.fixed-group {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    &.with-error {
+        .mat-error {
+            font-size: 75%;
+        }
+    }
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.docs-footer {
+    padding: 12px;
+    font-size: 12px;
+    margin-top: 40px;
+    background-color: $mat-indigo;
+    color: white;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.no-bg-color {
+    background-color: transparent;
+}
+
+.top-nav {
+    .mat-toolbar-row {
+        padding-left: 0;
+        padding-right: 0;
+    }    
+}
+.top-nav-user {
+    line-height: 1.2;
+    margin-right: 15px;
+    .top-nav-user-name {
+        font-size: 14px;
+    }
+    .top-nav-user-type {
+        font-size: 12px;
+        color: #ab9595;
+    }
+}
+.section {
+    margin-bottom: 80px;
+}
+
+
+.alert {
+    border-radius: 0;
+}
+
+.mat-card.no-content {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.clickable { 
+    cursor: pointer;
+}
+
+.list-grid {
+    .item-desc {
+        min-width: 150px;
+        text-align: center;
+    }
+}
+
+.data-table {
+    .mat-row {
+        cursor: pointer;
+    }
+    .mat-column-icon {
+        width: 50px;
+    }
+}
+.module-content.ql-editor {
+    padding-top: 25px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.title-with-icon {
+    .mat-icon-button {
+        vertical-align: middle;
+    }   
+}
+
+.btn-icon {
+    .mat-icon {
+        margin-right: 5px;
+    }
+}
+
+.mat-card-pin {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: green;
+    color: white;
+    padding: 8px 12px;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: 1;
+}
+
+.preview-image {
+    width: 255px;
+    height: 164px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.dropzone-image {
+    border: dotted 3px lightgray;
+    width: 261px;
+    height: 170px;
+    margin-bottom: 10px;
+}
+
+.inline-file-reader {
+    margin-top: 5px;
+}
+
+.card-image-bg {
+    height: 200px;
+    background-size: cover;
+    margin: -24px -24px 16px -24px;
+    width: calc(100% + 48px);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.user-details {
+    .mat-icon {
+        vertical-align: middle;
+    }
+}
