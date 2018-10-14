@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "bash deploy.sh"
+    "deploy": "npm run build && bash deploy.sh"
   },
   "private": true,
   "dependencies": {
