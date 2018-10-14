@@ -1,3 +1,4 @@
+import { EnrollService } from './../../common/services/enroll.service';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -88,6 +89,7 @@ export class CourseOverviewComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         public router: Router,
         private spinner: NgxSpinnerService,
+        private enrollService: EnrollService
     ) {
         this.course$ = this.store.select(state => state.course.profile);
 
@@ -115,7 +117,7 @@ export class CourseOverviewComponent implements OnInit, OnDestroy {
 
     getCourse() {
         this.spinner.show();
-        this.courseService.getByIdAndPublished(this.courseId, this.currentUser.id).subscribe(
+        this.enrollService.getByIdAndPublished(this.courseId, this.currentUser.id).subscribe(
             payload => {
                 this.spinner.hide();
                 this.store.dispatch({
@@ -137,7 +139,7 @@ export class CourseOverviewComponent implements OnInit, OnDestroy {
 
     enrollCourse(courseId: string) {
         this.spinner.show();
-        this.courseService.enrollCourseByUser(this.currentUser.id, courseId).subscribe(
+        this.enrollService.enrollCourseByUser(this.currentUser.id, courseId).subscribe(
             payload => {
                 this.spinner.hide();
                 this.isEnrolled = true;

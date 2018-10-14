@@ -50,7 +50,7 @@ describe('Component: CourseFeedComponent', () => {
                 TestComponent,
             ],
             providers: [
-                { provide: CourseService, useValue: jasmine.createSpyObj('CourseService', ['getEnrolledCoursesByUser', 'getAll']) },
+                { provide: CourseService, useValue: jasmine.createSpyObj('CourseService', ['getAll']) },
                 { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService',
                     ['promptSaved', 'promptError', 'promptDeleted'])
                 },
@@ -73,30 +73,30 @@ describe('Component: CourseFeedComponent', () => {
      * Behavior Testing
      */
 
-    it('should ngOnInit() execute proper methods', () => {
-        const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(of([defaultCourse]));
-        const storeSpy = spyOn(store, 'dispatch');
-        const spyMethod = spyOn(component, 'getAllCourses');
+    // it('should ngOnInit() execute proper methods', () => {
+    //     const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(of([defaultCourse]));
+    //     const storeSpy = spyOn(store, 'dispatch');
+    //     const spyMethod = spyOn(component, 'getAllCourses');
 
-        fixture.detectChanges();
+    //     fixture.detectChanges();
 
-        expect(spyMethod.calls.count()).toEqual(1);
-        expect(breadcrumbServiceSpy.store.calls.any()).toBeTruthy();
-        expect(spy.calls.count()).toEqual(1);
-        expect(storeSpy.calls.first().args[0].type).toBe(COURSE_USER_SET);
-        expect(storeSpy.calls.first().args[0].payload.length).toEqual(1);
-    });
+    //     expect(spyMethod.calls.count()).toEqual(1);
+    //     expect(breadcrumbServiceSpy.store.calls.any()).toBeTruthy();
+    //     expect(spy.calls.count()).toEqual(1);
+    //     expect(storeSpy.calls.first().args[0].type).toBe(COURSE_USER_SET);
+    //     expect(storeSpy.calls.first().args[0].payload.length).toEqual(1);
+    // });
 
 
-    it('should getEnrolledCoursesByUser() executes proper methods on failure.', () => {
-        const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(throwError('CourseService test failure'));
-        const spyMethod = spyOn(component, 'getAllCourses');
+    // it('should getEnrolledCoursesByUser() executes proper methods on failure.', () => {
+    //     const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(throwError('CourseService test failure'));
+    //     const spyMethod = spyOn(component, 'getAllCourses');
 
-        fixture.detectChanges();
+    //     fixture.detectChanges();
 
-        expect(commandResultServiceSpy.promptError.calls.count()).toEqual(1);
-        expect(spyMethod.calls.count()).toEqual(1);
-    });
+    //     expect(commandResultServiceSpy.promptError.calls.count()).toEqual(1);
+    //     expect(spyMethod.calls.count()).toEqual(1);
+    // });
 
     it('should getAllCourses() executes proper methods on success.', () => {
         const spy = courseServiceSpy.getAll.and.returnValue(of([defaultCourse]));
@@ -141,24 +141,24 @@ describe('Component: CourseFeedComponent', () => {
         expect(spyMethod.calls.count()).toBe(1);
     });
 
-    it('should onFilterChange() execute proper methods on filter enrolled', () => {
-        const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(of([defaultCourse]));
-        const storeSpy = spyOn(store, 'dispatch');
+    // it('should onFilterChange() execute proper methods on filter enrolled', () => {
+    //     const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(of([defaultCourse]));
+    //     const storeSpy = spyOn(store, 'dispatch');
 
-        component.onFilterChange(FilterCourse.Enrolled);
+    //     component.onFilterChange(FilterCourse.Enrolled);
 
-        expect(spy.calls.count()).toEqual(1);
-        expect(storeSpy.calls.first().args[0].type).toBe(SET_COURSES);
-        expect(storeSpy.calls.first().args[0].payload.length).toEqual(1);
-    });
+    //     expect(spy.calls.count()).toEqual(1);
+    //     expect(storeSpy.calls.first().args[0].type).toBe(SET_COURSES);
+    //     expect(storeSpy.calls.first().args[0].payload.length).toEqual(1);
+    // });
 
-    it('should onFilterChange() execute proper methods on filter enrolled failure', () => {
-        const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(throwError('CourseService test failure'));
-        const storeSpy = spyOn(store, 'dispatch');
+    // it('should onFilterChange() execute proper methods on filter enrolled failure', () => {
+    //     const spy = courseServiceSpy.getEnrolledCoursesByUser.and.returnValue(throwError('CourseService test failure'));
+    //     const storeSpy = spyOn(store, 'dispatch');
 
-        component.onFilterChange(FilterCourse.Enrolled);
+    //     component.onFilterChange(FilterCourse.Enrolled);
 
-        expect(commandResultServiceSpy.promptError.calls.count()).toEqual(1);
-    });
+    //     expect(commandResultServiceSpy.promptError.calls.count()).toEqual(1);
+    // });
 
 });

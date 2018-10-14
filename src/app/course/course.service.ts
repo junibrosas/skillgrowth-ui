@@ -59,19 +59,6 @@ export class CourseService extends RequestBase {
         return this.http.get<ICourse[]>(this.apiUrl, options);
     }
 
-    getByIdAndPublished(courseId: string, userId: string) {
-        const options = { params: new HttpParams().set('user', userId.toString()) };
-        return this.http.get<IPayloadCourse>('/api/enroll/course/' + courseId, options);
-    }
-
-    getEnrolledCoursesByUser(userId: string) {
-        return this.http.get<ICourse[]>('/api/enroll/user/' + userId);
-    }
-
-    enrollCourseByUser(userId: string, courseId: string) {
-        return this.http.post('/api/enroll', { user: userId, course: courseId });
-    }
-
     getList() {
         this.http.get<ICourse>('/api/list/courses/').subscribe(
             grid => this.store.dispatch({ type: COMMON_SET_LISTGRID, payload: grid }),

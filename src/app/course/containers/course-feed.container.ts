@@ -11,6 +11,7 @@ import { AppState } from '../../common/reducers/index';
 import { SET_COURSES, COURSE_USER_SET } from './../course.actions';
 import { CourseService } from './../course.service';
 import { ICourse, FilterCourse } from './../course.types';
+import { EnrollService } from '../../common/services/enroll.service';
 
 @Component({
     selector: 'app-course-feed',
@@ -61,6 +62,7 @@ export class CourseFeedComponent implements OnInit, OnDestroy {
         private commandResult: CommandResultService,
         private router: Router,
         private spinner: NgxSpinnerService,
+        private enrollService: EnrollService
     ) {
         this.courses$ = this.store.select(state => state.course.courses);
         this.userCourses$ = this.store.select(state => state.course.userCourses);
@@ -97,7 +99,7 @@ export class CourseFeedComponent implements OnInit, OnDestroy {
 
     getEnrolledCourses() {
         this.spinner.show();
-        this.courseService.getEnrolledCoursesByUser(this.currentUser.id).subscribe(
+        this.enrollService.getEnrolledCoursesByUser(this.currentUser.id).subscribe(
             courses => {
                 this.spinner.hide();
                 this.store.dispatch({ type: COURSE_USER_SET, payload: courses });
@@ -130,7 +132,7 @@ export class CourseFeedComponent implements OnInit, OnDestroy {
 
             case FilterCourse.Enrolled:
                 this.spinner.show();
-                this.courseService.getEnrolledCoursesByUser(this.currentUser.id).subscribe(
+                this.enrollService.getEnrolledCoursesByUser(this.currentUser.id).subscribe(
                     courses => {
                         this.spinner.hide();
                         this.store.dispatch({
