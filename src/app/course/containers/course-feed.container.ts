@@ -34,8 +34,8 @@ import { ICourse, FilterCourse } from './../course.types';
                     <h5>All Courses</h5>
                 </div>
                 <div class="col-md-3">
-                    <course-search (whenTypeAhead)="onSearchResponse($event)">
-                    </course-search>
+                    <app-course-search (whenTypeAhead)="onSearchResponse($event)">
+                    </app-course-search>
                 </div>
                 <div class="col-md-3">
                     <course-filter (selected)="onFilterChange($event)">
@@ -50,9 +50,9 @@ import { ICourse, FilterCourse } from './../course.types';
 
 export class CourseFeedComponent implements OnInit, OnDestroy {
     public currentUserSubscription: Subscription;
-    private courses$: Observable<ICourse[]>;
-    private userCourses$: Observable<ICourse[]>;
-    private currentUser: IUser;
+    courses$: Observable<ICourse[]>;
+    userCourses$: Observable<ICourse[]>;
+    currentUser: IUser;
 
     constructor(
         private store: Store<AppState>,

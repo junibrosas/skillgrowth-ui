@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CourseService extends RequestBase {
-    private apiUrl = `${environment.apiUrl}/course/`;
+    apiUrl = `${environment.apiUrl}/course/`;
 
     constructor(
         public http: HttpClient,

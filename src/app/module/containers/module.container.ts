@@ -33,9 +33,9 @@ import { IModule, ModuleStatus } from './../module.types';
 })
 
 export class ModuleComponent implements OnInit, OnDestroy {
-    private courseId: string;
-    private destroyed$: Subject<any> = new Subject<any>();
-    private breadcrumbsSubscription: Subscription;
+    courseId: string;
+    destroyed$: Subject<any> = new Subject<any>();
+    breadcrumbsSubscription: Subscription;
 
     constructor(
         private courseService: CourseService,

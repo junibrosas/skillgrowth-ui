@@ -37,7 +37,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     public breadcrumbsSubscription: Subscription;
     public subjectId: string;
     public subject: ISubject;
-    private course$: Observable<ICourse>;
+    course$: Observable<ICourse>;
 
     constructor(
         private breadcrumbService: BreadcrumbsService,

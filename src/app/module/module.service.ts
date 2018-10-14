@@ -8,7 +8,7 @@ import { IModule, IPayloadModule } from './module.types';
 
 @Injectable()
 export class ModuleService extends RequestBase {
-    private apiUrl = `${environment.apiUrl}/module/`;
+    apiUrl = `${environment.apiUrl}/module/`;
 
     constructor(public http: HttpClient) {
         super(http);

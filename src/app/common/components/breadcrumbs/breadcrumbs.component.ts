@@ -46,7 +46,7 @@ export class BreadcrumbComponent implements OnInit {
     public addClass: string;
 
     // The breadcrumbs of the current route
-    private currentBreadcrumbs: IBreadcrumb[];
+    currentBreadcrumbs: IBreadcrumb[];
 
     public constructor(private breadcrumbService: BreadcrumbsService, private activatedRoute: ActivatedRoute, private router: Router) {
         this.breadcrumbService.get().subscribe((breadcrumbs: IBreadcrumb[]) => {

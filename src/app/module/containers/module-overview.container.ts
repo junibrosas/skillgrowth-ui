@@ -34,13 +34,13 @@ import { BreadcrumbsService } from './../../common/components/breadcrumbs/breadc
 })
 
 export class ModuleOverviewComponent implements OnDestroy, OnInit {
-    private module$: Observable<IModule>;
-    private moduleId: string;
-    private courseId: string;
-    private currentUser: IUser;
-    private currentUserSubscription: Subscription;
-    private breadcrumbsSubscription: Subscription;
-    private isCompleted: boolean;
+    module$: Observable<IModule>;
+    moduleId: string;
+    courseId: string;
+    currentUser: IUser;
+    currentUserSubscription: Subscription;
+    breadcrumbsSubscription: Subscription;
+    isCompleted: boolean;
 
     constructor(
         private store: Store<AppState>,

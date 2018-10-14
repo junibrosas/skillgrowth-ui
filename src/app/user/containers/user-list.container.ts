@@ -70,17 +70,17 @@ import { USER_ADMIN } from '../../auth/auth.constants';
 })
 
 export class UserListComponent implements OnInit, OnDestroy {
-    private users$: Observable<IUser[]>;
-    private users: IUser[];
-    private profile: IUser;
-    private dataSource = new MatTableDataSource([]);
-    private columns = ['firstname', 'lastname', 'email', 'userType', 'actions'];
-    private currentUser: IUser;
-    private usersSubscription: Subscription;
-    private currentUserSubscription: Subscription;
-    private selectedUserId: string;
-    private isDeletable: boolean;
-    private isModalOpened = false;
+    users$: Observable<IUser[]>;
+    users: IUser[];
+    profile: IUser;
+    dataSource = new MatTableDataSource([]);
+    columns = ['firstname', 'lastname', 'email', 'userType', 'actions'];
+    currentUser: IUser;
+    usersSubscription: Subscription;
+    currentUserSubscription: Subscription;
+    selectedUserId: string;
+    isDeletable: boolean;
+    isModalOpened = false;
 
     constructor(
         private userService: UserService,

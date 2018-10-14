@@ -39,14 +39,14 @@ import { COMMON_BREADCRUMB_SET } from '../../common/actions/common.actions';
 })
 
 export class ModuleProfileComponent implements OnDestroy, OnInit {
-    private moduleId: string;
-    private form: FormGroup;
-    private module: IModule;
-    private courseId: string;
-    private currentUser: IUser;
-    private currentUserSubscription: Subscription;
-    private breadcrumbsSubscription: Subscription;
-    private moduleSubscription: Subscription;
+    moduleId: string;
+    form: FormGroup;
+    module: IModule;
+    courseId: string;
+    currentUser: IUser;
+    currentUserSubscription: Subscription;
+    breadcrumbsSubscription: Subscription;
+    moduleSubscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,

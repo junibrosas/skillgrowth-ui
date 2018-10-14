@@ -76,9 +76,9 @@ export class CourseOverviewComponent implements OnInit, OnDestroy {
     public currentUserSubscription: Subscription;
     public isEnrolled = false;
     public dataSource = new MatTableDataSource([]);
-    private course$: Observable<ICourse>;
-    private displayedColumns = ['icon', 'name', 'author', 'date'];
-    private currentUser: IUser;
+    course$: Observable<ICourse>;
+    displayedColumns = ['icon', 'name', 'author', 'date'];
+    currentUser: IUser;
 
     constructor(
         private store: Store<AppState>,

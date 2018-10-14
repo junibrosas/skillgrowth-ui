@@ -17,7 +17,7 @@ import { CommandResultService } from './../../common/services/command-result.ser
     <div>
         <h1 mat-dialog-title >Edit User</h1>
         <mat-dialog-content>
-            <form (ngSubmit)="submit(); f.resetForm()" [formGroup]="form" #f="ngForm">
+            <form (ngSubmit)="onSave(); f.resetForm()" [formGroup]="form" #f="ngForm">
                 <mat-form-field class="form-group full-width">
                     <input matInput placeholder="First name" formControlName="firstname" />
                     <mat-error *ngIf="firstname.hasError('required')">First name is required</mat-error>
@@ -36,7 +36,7 @@ import { CommandResultService } from './../../common/services/command-result.ser
 })
 
 export class UserProfileModalComponent implements OnInit {
-    private form: FormGroup;
+    form: FormGroup;
 
     constructor(
         private userService: UserService,

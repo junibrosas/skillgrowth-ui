@@ -1,6 +1,5 @@
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { ICourse } from './../course.types';
-import { Observable } from 'rxjs/Observable';
+import { of, throwError } from 'rxjs';
 import { CourseService } from './../course.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommandResultService } from './../../common/services/command-result.service';
@@ -33,7 +32,7 @@ class ContentFormHostComponent {
         isEnrolled: true
     };
 
-    private subjectId: number = 1;
+    subjectId = 1;
 
     public onSubmitted(course: ICourse) { }
     public onReset() { }
@@ -47,14 +46,14 @@ describe('Component: CourseFormComponent', () => {
     let courseServiceSpy: jasmine.SpyObj<CourseService>;
     let commandResultServiceSpy: jasmine.SpyObj<CommandResultService>;
     let childElement: CourseFormComponent;
-    let emptyCourse: ICourse = {
+    const emptyCourse: ICourse = {
         id: '',
         name: '',
         description: '',
         subjectId: '',
         modules: []
     };
-    let defaultCourse: ICourse = {
+    const defaultCourse: ICourse = {
         id: '1',
         name: 'Course',
         subjectId: '1',
@@ -88,7 +87,9 @@ describe('Component: CourseFormComponent', () => {
             ],
             providers: [
                 { provide: CourseService, useValue: jasmine.createSpyObj('CourseService', ['create', 'update']) },
-                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService', ['promptSaved', 'promptError', 'promptDeleted']) },
+                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService',
+                    ['promptSaved', 'promptError', 'promptDeleted'])
+                },
             ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
@@ -112,10 +113,10 @@ describe('Component: CourseFormComponent', () => {
      * UI Testing
      */
     it('should display form buttons', () => {
-        let btnSaveElement = fixture.nativeElement.querySelectorAll('.btn-submit');
-        let btnCancelElement = fixture.nativeElement.querySelectorAll('.btn-cancel');
-        let fileElement = fixture.nativeElement.querySelectorAll('.inline-file-reader');
-        let nameInput = fixture.nativeElement.querySelectorAll('.name-input');
+        const btnSaveElement = fixture.nativeElement.querySelectorAll('.btn-submit');
+        const btnCancelElement = fixture.nativeElement.querySelectorAll('.btn-cancel');
+        const fileElement = fixture.nativeElement.querySelectorAll('.inline-file-reader');
+        const nameInput = fixture.nativeElement.querySelectorAll('.name-input');
 
         expect(btnSaveElement.length).toEqual(1);
         expect(btnSaveElement.length).toEqual(1);
@@ -148,7 +149,7 @@ describe('Component: CourseFormComponent', () => {
     });
 
     it('should raise submitted() event when course submitted', () => {
-        let spy = courseServiceSpy.create.and.returnValue(Observable.of(defaultCourse));
+        const spy = courseServiceSpy.create.and.returnValue(of(defaultCourse));
         let course: ICourse;
 
         component.submitted.subscribe(c => course = c);
@@ -171,8 +172,8 @@ describe('Component: CourseFormComponent', () => {
      * Behavior Testing
      */
     it('should raise reset event when clicked', () => {
-        let spyMethod = spyOn(component.reset, 'emit');
-        let element = fixture.debugElement.query(By.css('.btn-reset'));
+        const spyMethod = spyOn(component.reset, 'emit');
+        const element = fixture.debugElement.query(By.css('.btn-reset'));
 
         element.triggerEventHandler('click', null);
 
@@ -180,9 +181,8 @@ describe('Component: CourseFormComponent', () => {
     });
 
     it('should createOrUpdate() execute error properly', () => {
-        let spy = courseServiceSpy.create.and.returnValue(new ErrorObservable('Test Failure'));
-        let element = fixture.debugElement.query(By.css('#course-form'));
-        let course: ICourse;
+        const spy = courseServiceSpy.create.and.returnValue(throwError('Test Failure'));
+        const element = fixture.debugElement.query(By.css('#course-form'));
 
         component.createOrUpdate(defaultCourse);
 
@@ -194,8 +194,8 @@ describe('Component: CourseFormComponent', () => {
      */
 
     it('should host component properties confirm working on child component', () => {
-        let input = fixtureHost.debugElement.query(By.css('.name-input')); // use fixture.debugElement object
-        let el = input.nativeElement; // convert to nativeElement
+        const input = fixtureHost.debugElement.query(By.css('.name-input')); // use fixture.debugElement object
+        const el = input.nativeElement; // convert to nativeElement
 
         componentHost.course = defaultCourse;
         fixtureHost.detectChanges();

@@ -8,8 +8,8 @@ export class BreadcrumbsService {
     public breadcrumbsSource: Subject<IBreadcrumb[]>;
     public breadcrumbsChanged$: Observable<IBreadcrumb[]>;
 
-    private breadcrumbs: IBreadcrumb[];
-    private prefixedBreadcrumbs: IBreadcrumb[] = [];
+    breadcrumbs: IBreadcrumb[];
+    prefixedBreadcrumbs: IBreadcrumb[] = [];
 
     constructor() {
         this.breadcrumbs = [];
@@ -25,7 +25,7 @@ export class BreadcrumbsService {
     public store(breadcrumbs: IBreadcrumb[]) {
         this.breadcrumbs = breadcrumbs;
 
-        let allBreadcrumbs = this.prefixedBreadcrumbs.concat(this.breadcrumbs);
+        const allBreadcrumbs = this.prefixedBreadcrumbs.concat(this.breadcrumbs);
         this.breadcrumbsSource.next(allBreadcrumbs);
     }
 
@@ -34,7 +34,7 @@ export class BreadcrumbsService {
     public storePrefixed(breadcrumb: IBreadcrumb) {
         this.storeIfUnique(breadcrumb);
         localStorage.setItem('prefixedBreadcrumbs', JSON.stringify(this.prefixedBreadcrumbs));
-        let allBreadcrumbs = this.prefixedBreadcrumbs.concat(this.breadcrumbs);
+        const allBreadcrumbs = this.prefixedBreadcrumbs.concat(this.breadcrumbs);
         this.breadcrumbsSource.next(allBreadcrumbs);
 
     }
@@ -47,7 +47,7 @@ export class BreadcrumbsService {
     // storeIfUnique checks if there are any duplicate prefixed breadcrumbs
     private storeIfUnique(newBreadcrumb: IBreadcrumb) {
         let isUnique = true;
-        for (let crumb of this.prefixedBreadcrumbs) {
+        for (const crumb of this.prefixedBreadcrumbs) {
             if (newBreadcrumb.url === crumb.url) {
                 isUnique = false;
                 break;

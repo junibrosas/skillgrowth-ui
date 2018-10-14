@@ -5,9 +5,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class CommandResultService {
-    private savedText = 'Changes has been saved.';
-    private deletedText = 'Deleted successfully.';
-    private errorText = 'Something is wrong.';
+    savedText = 'Changes has been saved.';
+    deletedText = 'Deleted successfully.';
+    errorText = 'Something is wrong.';
 
     constructor(
         private toastr: ToastrService

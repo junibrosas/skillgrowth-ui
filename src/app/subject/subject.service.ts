@@ -10,7 +10,7 @@ import { AppState } from './../common/reducers/index';
 
 @Injectable()
 export class SubjectService extends RequestBase {
-    private apiUrl = `${environment.apiUrl}/subject/`;
+    apiUrl = `${environment.apiUrl}/subject/`;
 
     constructor(
         public http: HttpClient,

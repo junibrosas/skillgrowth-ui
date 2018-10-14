@@ -40,11 +40,11 @@ export class ListGridComponent implements OnDestroy {
     @Output() deleteItem = new EventEmitter<number>();
     @Output() editItem = new EventEmitter<number>();
 
-    private listGrid$: Observable<IListItem[]>;
-    private listGrid: IListItem[];
-    private checkAll = false;
-    private destroyed$: Subject<any> = new Subject<any>();
-    private itemId: number;
+    listGrid$: Observable<IListItem[]>;
+    listGrid: IListItem[];
+    checkAll = false;
+    destroyed$: Subject<any> = new Subject<any>();
+    itemId: number;
 
     constructor(
         private store: Store<AppState>

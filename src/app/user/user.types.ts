@@ -12,6 +12,7 @@ export interface IUser {
         lastname: string;
         fullname?: string;
     };
+    active?: boolean;
 }
 
 export interface IAuthToken {

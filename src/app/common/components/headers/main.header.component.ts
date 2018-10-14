@@ -40,8 +40,8 @@ import { USER_ADMIN } from '../../../auth/auth.constants';
 })
 
 export class MainHeaderComponent {
-    private currentUser: IUser;
-    private currentUser$: Observable<IUser>;
+    currentUser: IUser;
+    currentUser$: Observable<IUser>;
 
     constructor(
         private router: Router,

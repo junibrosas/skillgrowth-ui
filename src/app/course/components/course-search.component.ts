@@ -23,7 +23,7 @@ export class CourseSearchComponent implements OnInit, OnDestroy {
 
     public typeaheadSubscription: Subscription;
     public form: FormGroup;
-    private searchTerms = new Subject<string>();
+    searchTerms = new Subject<string>();
 
     constructor(
         private formBuilder: FormBuilder,

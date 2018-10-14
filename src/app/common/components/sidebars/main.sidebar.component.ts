@@ -47,13 +47,13 @@ import { IMenuItem } from './../../types/common.types';
 })
 
 export class MainSidebarComponent implements OnInit {
-    private segment: string;
-    private parentIndex: number;
-    private activeChildIndex: number;
-    private menuItems: IMenuItem[];
-    private user$: Observable<IUser>;
-    private user: IUser;
-    private destroyed$: Subject<any> = new Subject<any>();
+    segment: string;
+    parentIndex: number;
+    activeChildIndex: number;
+    menuItems: IMenuItem[];
+    user$: Observable<IUser>;
+    user: IUser;
+    destroyed$: Subject<any> = new Subject<any>();
 
     constructor(
         private route: ActivatedRoute,

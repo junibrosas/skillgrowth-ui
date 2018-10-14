@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class UserService extends RequestBase {
-    private apiUrl = `${environment.apiUrl}/user/`;
+    apiUrl = `${environment.apiUrl}/user/`;
 
     constructor(public http: HttpClient) {
         super(http);

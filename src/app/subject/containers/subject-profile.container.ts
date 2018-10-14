@@ -36,13 +36,13 @@ export class SubjectProfileComponent implements OnDestroy, OnInit {
     @Input() user: IUser;
     @Output() submitted = new EventEmitter<any>();
 
-    private subjectId: number;
-    private form: FormGroup;
-    private isEditable: boolean;
-    private subject: ISubject;
-    private currentUser: IUser;
-    private currentUserSubscription: Subscription;
-    private subjectSubscription: Subscription;
+    subjectId: number;
+    form: FormGroup;
+    isEditable: boolean;
+    subject: ISubject;
+    currentUser: IUser;
+    currentUserSubscription: Subscription;
+    subjectSubscription: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,

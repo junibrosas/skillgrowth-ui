@@ -31,9 +31,9 @@ import {
 })
 
 export class SubjectComponent implements OnInit, OnDestroy {
-    private breadcrumbsSub: Subscription;
-    private user: IUser;
-    private userSub: Subscription;
+    breadcrumbsSub: Subscription;
+    user: IUser;
+    userSub: Subscription;
 
     constructor(
         private store: Store<AppState>,
@@ -105,7 +105,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
         );
     }
 
-    getSubjects() {
+    getSubjects($event?: any) {
         this.spinner.show();
         this.subjectService.getByUser(this.user.id).subscribe(
             subjects => {

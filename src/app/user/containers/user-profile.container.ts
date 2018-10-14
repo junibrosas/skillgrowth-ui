@@ -37,9 +37,9 @@ import { IUser } from '../user.types';
 })
 
 export class UserProfileComponent implements OnInit {
-    private userId: string;
-    private user: IUser;
-    private userSubscription: Subscription;
+    userId: string;
+    user: IUser;
+    userSubscription: Subscription;
 
     constructor(
         private userService: UserService,
