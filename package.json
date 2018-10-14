@@ -8,7 +8,8 @@
     "prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "bash deploy.sh"
   },
   "private": true,
   "dependencies": {
