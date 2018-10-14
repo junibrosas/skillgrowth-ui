@@ -1,3 +1,4 @@
+import { MaterialModule } from './../material.module';
 import { ActivateUserComponent } from './containers/activate-user.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -54,11 +55,7 @@ export const routes: Routes = [
         ReactiveFormsModule,
         SharedModule,
         RouterModule.forChild(routes),
-
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatCheckboxModule,
+        MaterialModule
     ],
     exports: [],
     declarations: [
