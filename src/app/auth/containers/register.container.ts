@@ -124,7 +124,8 @@ export class RegisterComponent implements OnInit {
                 user => {
                     this.spinner.hide();
                     /* tslint:disable: max-line-length */
-                    this.commandResult.success(`An activation token has been sent to ${this.form.value.email}. Please verify your email address within an hour to activate your account.`);
+                    // TODO: disable activation for now. Fix activation soon once email integrated properly.
+                    // this.commandResult.success(`An activation token has been sent to ${this.form.value.email}. Please verify your email address within an hour to activate your account.`);
                     this.router.navigateByUrl('auth/login');
                 },
                 error => {

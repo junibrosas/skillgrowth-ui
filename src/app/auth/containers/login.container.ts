@@ -35,7 +35,7 @@ import { CommandResultService } from '../../common/services/command-result.servi
                 </button>
             </div>
             <div class="text-center martop-20">
-                <span>Do not have an account?</span> <a class="link-signup" [routerLink]="'/auth/register'">Sign Up!</a>
+                <span>Do not have an account? </span> <a class="link-signup" [routerLink]="'/auth/register'">Sign Up!</a>
             </div>
         </form>
     </mat-card>`
