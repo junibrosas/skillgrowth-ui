@@ -9,13 +9,13 @@ import { QuillModule } from 'ngx-quill';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { ModuleProfileComponent } from './containers/module-profile.container';
+import { ModuleProfileComponent } from './module-profile/module-profile.component';
 import { moduleReducer } from './module.reducer';
 import { SharedModule } from '../common/index';
 import { ModuleService } from './module.service';
 import { courseReducer } from '../course/course.reducer';
 import { CourseService } from './../course/course.service';
-import { ModuleOverviewComponent } from './containers/module-overview.container';
+import { ModuleOverviewComponent } from './module-overview/module-overview.component';
 import { CommandResultService } from './../common/services/command-result.service';
 import { AuthGuard } from './../auth/auth.guard';
 import { AuthContributorGuard } from './../auth/auth.contributor.guard';

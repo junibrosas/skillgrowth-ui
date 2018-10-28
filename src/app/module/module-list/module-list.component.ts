@@ -16,20 +16,7 @@ import { IModule, ModuleStatus } from './../module.types';
 
 @Component({
     selector: 'app-module',
-    styles: [],
-    template: `<app-content>
-        <div class="mb-20">
-            <button mat-raised-button [routerLink]="['/module']" [queryParams]="{ courseId: courseId }">
-                <mat-icon>add</mat-icon>
-                Add New Module
-            </button>
-        </div>
-        <h5>Modules</h5>
-        <app-list-grid
-            (selectedItem)="onSelectItem($event)"
-            (editItem)="onEditItem($event)"
-            (deleteItem)="onDeleteItem($event)"></app-list-grid>
-    </app-content>`
+    templateUrl: './module-list.component.html'
 })
 
 export class ModuleComponent implements OnInit, OnDestroy {

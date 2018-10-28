@@ -1,0 +1,18 @@
+<app-content>
+    <form id="module-editor-form" (ngSubmit)="submit()" [formGroup]="form" #f="ngForm">
+        <mat-form-field class="form-group full-width">
+            <input matInput placeholder="Title" formControlName="name" />
+            <mat-error *ngIf="name.hasError('required')">Title is required</mat-error>
+        </mat-form-field>
+        <div class="form-group">
+            <quill-editor [style]="{height: '350px'}"
+                formControlName="description"
+                [placeholder]="'Start typing...'"></quill-editor>
+        </div>
+        <div class="form-group">
+            <button mat-raised-button color="primary">Publish</button>
+            <button type="button" (click)="submit(true)" mat-raised-button color="primary">Save As Draft</button>
+            <button type="button" (click)="gotoParent()" mat-raised-button color="primary">Cancel</button>
+        </div>
+    </form>
+</app-content>

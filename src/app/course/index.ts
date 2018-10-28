@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from '../common/index';
 import { courseReducer } from './course.reducer';
 import { subjectReducer } from '../subject/subject.reducer';
-import { ModuleComponent } from '../module/containers/module.container';
+import { ModuleComponent } from '../module/module-list/module-list.component';
 import { ModuleService } from './../module/module.service';
 import { CourseOverviewComponent } from './containers/course-overview.container';
 import { AuthClientGuard } from './../auth/auth.client.guard';

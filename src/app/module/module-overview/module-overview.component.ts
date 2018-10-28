@@ -7,7 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AppState } from '../../common/reducers/index';
 import { IModule } from './../module.types';
 import { ModuleService } from '../module.service';
-import { SET_MODULE, RESET_MODULE, MODULE_MARK_COMPLETE } from './../module.action';
+import { SET_MODULE, RESET_MODULE } from './../module.action';
 import { COMMON_BREADCRUMB_SET } from '../../common/actions/common.actions';
 import { CommandResultService } from './../../common/services/command-result.service';
 import { IUser } from './../../user/user.types';
@@ -15,22 +15,7 @@ import { BreadcrumbsService } from './../../common/components/breadcrumbs/breadc
 
 @Component({
     selector: 'app-module-overview',
-    styles: [],
-    template: `<app-content *ngIf="module$ | async as module">
-        <h3 *ngIf="module.name" class="title-with-icon">{{module.name}}
-            <button *ngIf="isCompleted" mat-raised-button color="primary" class="float-right btn-icon" (click)="markAsComplete(false)">
-                Completed
-            </button>
-            <button *ngIf="!isCompleted" mat-raised-button color="basic" class="float-right btn-icon" (click)="markAsComplete(true)">
-                Mark as Complete
-            </button>
-        </h3>
-        <div *ngIf="module.author">by {{module.author}}</div>
-        <div *ngIf="module.id">{{module.dateCreated | date}}</div>
-        <div class="ql-snow">
-            <div [innerHtml]="module.description" class="module-content ql-editor"></div>
-        </div>
-    </app-content>`
+    templateUrl: './module-overview.component.html'
 })
 
 export class ModuleOverviewComponent implements OnDestroy, OnInit {
