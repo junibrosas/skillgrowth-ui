@@ -15,7 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { ListGridComponent } from './../common/components/list/list-grid.component';
 import { ControlInputInlineComponent } from './components/controls/control.input.inline.component';
-import { PageHeaderComponent } from './../common/components/headers/page.header.component';
 import { ControlInputComponent } from './components/controls/control.input.component';
 import { CheckboxControlComponent } from './components/controls/control.checkbox.component';
 import { commonReducer } from './reducers/common.reducer';
@@ -47,7 +46,6 @@ import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.compon
         MatButtonModule,
 
         ListGridComponent,
-        PageHeaderComponent,
         ControlInputInlineComponent,
         ControlInputComponent,
         CheckboxControlComponent,
@@ -59,7 +57,6 @@ import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.compon
     ],
     declarations: [
         ListGridComponent,
-        PageHeaderComponent,
         ControlInputInlineComponent,
         ControlInputComponent,
         CheckboxControlComponent,

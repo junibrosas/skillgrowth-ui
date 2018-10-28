@@ -23,7 +23,7 @@ import { BreadcrumbsService } from './common/components/breadcrumbs/breadcrumbs.
 import { AuthAdminGuard } from './auth/auth.admin.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { LayoutAdminComponent } from './common/layouts/layout.admin.component';
-import { MainHeaderComponent } from './common/components/headers/main.header.component';
+import { MainHeaderComponent } from './common/components/headers/main-header/main-header.component';
 import { NotFound404Component } from './not-found404.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MaterialModule } from './material.module';
