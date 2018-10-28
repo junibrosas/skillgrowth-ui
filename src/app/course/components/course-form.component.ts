@@ -9,7 +9,7 @@ import { ICourse } from './../course.types';
 import { CommandResultService } from '../../common/services/command-result.service';
 
 @Component({
-    selector: 'course-form-component',
+    selector: 'app-course-form',
     styles: [],
     template: `<form id="course-form" (ngSubmit)="submit(); form.valid && f.resetForm()" [formGroup]="form" #f="ngForm">
         <div class="row">
@@ -63,7 +63,9 @@ export class CourseFormComponent implements OnChanges, OnInit {
     }
 
     submit() {
-        if (!this.form.valid) return false;
+        if (!this.form.valid) {
+            return false;
+        }
 
         let course = this.form.value;
 
@@ -90,9 +92,9 @@ export class CourseFormComponent implements OnChanges, OnInit {
     }
 
     onChangeFileInput($event) {
-        let inputFile = $event.target;
-        let file: File = inputFile.files[0];
-        let reader: FileReader = new FileReader();
+        const inputFile = $event.target;
+        const file: File = inputFile.files[0];
+        const reader: FileReader = new FileReader();
 
         reader.onloadend = (e) => {
             this.form.patchValue({

@@ -72,7 +72,7 @@ import { CommandResultService } from '../../common/services/command-result.servi
                 <button mat-raised-button color="primary" class="full-width martop-20">Sign up</button>
             </div>
             <div class="text-center martop-20">
-                <span>Already have an account?</span> <a class="pull-left" [routerLink]="'/auth/login'">Login!</a>
+                <span>Already have an account?</span> <a class="pull-left" [routerLink]="'/auth/login'"> Login!</a>
             </div>
         </form>
     </mat-card>`

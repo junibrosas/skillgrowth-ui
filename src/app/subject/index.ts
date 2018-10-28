@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 
 import { SharedModule } from '../common/index';
 import { subjectReducer } from './subject.reducer';
-import { SubjectProfileComponent } from './containers/subject-profile.container';
-import { SubjectComponent } from './containers/subject.container';
+import { SubjectProfileComponent } from './subject-profile/subject-profile.container';
+import { SubjectComponent } from './subject-list/subject-list.component';
 import { CourseComponent } from '../course/containers/course.container';
 import { CourseService } from './../course/course.service';
 import { SubjectService } from './subject.service';

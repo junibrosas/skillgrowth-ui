@@ -5,29 +5,19 @@ import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { COMMON_BREADCRUMB_SET, COMMON_SET_LISTGRID } from './../../common/actions/common.actions';
-import { AppState } from '../../common/reducers/index';
-import { BreadcrumbsService } from './../../common/components/breadcrumbs/breadcrumbs.service';
+import { COMMON_BREADCRUMB_SET, COMMON_SET_LISTGRID } from '../../common/actions/common.actions';
+import { AppState } from '../../common/reducers';
+import { BreadcrumbsService } from '../../common/components/breadcrumbs/breadcrumbs.service';
 import { SubjectService } from '../subject.service';
-import { CommandResultService } from './../../common/services/command-result.service';
-import { IUser } from './../../user/user.types';
+import { CommandResultService } from '../../common/services/command-result.service';
+import { IUser } from '../../user/user.types';
 import {
     SET_SUBJECT,
-    RESET_SUBJECT } from './../subject.actions';
+    RESET_SUBJECT } from '../subject.actions';
 
 @Component({
     selector: 'app-subject',
-    styles: [],
-    template: `<app-content>
-        <app-subject-profile
-            [user]="user"
-            (submitted)="getSubjects($event)"></app-subject-profile>
-        <h5>Subjects</h5>
-        <app-list-grid
-            (selectedItem)="onSelectItem($event)"
-            (editItem)="onEditItem($event)"
-            (deleteItem)="onDeleteItem($event)"></app-list-grid>
-    </app-content>`
+    templateUrl: './subject-list.component.html'
 })
 
 export class SubjectComponent implements OnInit, OnDestroy {

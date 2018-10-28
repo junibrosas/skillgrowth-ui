@@ -20,11 +20,11 @@ import { CommandResultService } from './../../common/services/command-result.ser
     styles: [],
     template: `
     <app-content *ngIf="course$ | async as course">
-        <course-form-component
+        <app-course-form
             [subjectId]="subjectId"
             [course]="course"
             (submitted)="onSubmitted($event)"
-            (reset)="onReset()"></course-form-component>
+            (reset)="onReset()"></app-course-form>
         <h5>Courses</h5>
         <app-list-grid
             (selectedItem)="onSelectItem($event)"

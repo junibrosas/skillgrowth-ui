@@ -14,11 +14,11 @@ import { ModuleStatus } from '../../module/module.types';
 
 @Component({
     template: `
-    <course-form-component
+    <app-course-form
         [subjectId]="subjectId"
         [course]="course"
         (submitted)="onSubmitted($event)"
-        (reset)="onSubmitted($event)"></course-form-component>
+        (reset)="onSubmitted($event)"></app-course-form>
     `
 })
 class ContentFormHostComponent {
