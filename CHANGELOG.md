@@ -1,3 +1,3 @@
 # Changelog
 
-- v1.0.1: Copied over common styles from RateMyAgent.Web
+- v1.0.1: fix all current unit tests issues and make it stable
