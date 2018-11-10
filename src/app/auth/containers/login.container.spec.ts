@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Observable, throwError, of } from 'rxjs';
+import { throwError, of } from 'rxjs';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -52,7 +52,8 @@ describe('Container: LoginContainer', () => {
             ],
             providers: [
                 { provide: AuthService, useValue: jasmine.createSpyObj('AuthService', ['loginUser', 'logout']) },
-                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService', ['prompSaved', 'promptError']) }
+                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService',
+                ['prompSaved', 'promptError', 'error']) }
             ],
             declarations: [
                 TestComponent,
@@ -102,6 +103,8 @@ describe('Container: LoginContainer', () => {
      * Test if form is submitted by triggering element event.
      */
     it('should form be valid if has proper form data when submitted.', () => {
+        authServiceSpy.loginUser.and.returnValue(of({}));
+
         component.form.patchValue(loginData);
         component.submit();
 
@@ -109,6 +112,7 @@ describe('Container: LoginContainer', () => {
     });
 
     it('should call service.loginUser() if form is submitted and valid.', () => {
+        authServiceSpy.loginUser.and.returnValue(of({}));
         component.form.patchValue(loginData);
         component.submit();
 
@@ -143,7 +147,7 @@ describe('Container: LoginContainer', () => {
     });
 
     it('should display success when register successfully.', () => {
-        const serviceSpy = authServiceSpy.loginUser.and.returnValue(of(user));
+        authServiceSpy.loginUser.and.returnValue(of(user));
         const routerSpy = spyOn((<any>component).router, 'navigateByUrl');
 
         component.form.patchValue(loginData);
@@ -153,11 +157,11 @@ describe('Container: LoginContainer', () => {
     });
 
     it('should display error when AuthService fails', () => {
-        const serviceSpy = authServiceSpy.loginUser.and.returnValue(throwError({ error: 'UserService test failure' }));
+        authServiceSpy.loginUser.and.returnValue(throwError({ error: 'UserService test failure' }));
 
         component.form.patchValue(loginData);
         component.submit();
 
-        expect(commandResultSpy.promptError.calls.first().args[0]).toBe('UserService test failure');
+        expect(commandResultSpy.error.calls.count()).toBe(1);
     });
 });

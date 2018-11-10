@@ -1,13 +1,10 @@
 import { AuthService } from './../auth.service';
 import { IValueRecord } from './../../common/types/common.types';
-import { UserService } from './../../user/user.service';
 import { Router } from '@angular/router';
-import { Component, OnDestroy, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { AppState } from '../../common/reducers/index';
-import * as Actions from './../../common/actions/common.actions';
 import { PasswordValidation } from '../../common/validations/password.validation';
 import { CommandResultService } from '../../common/services/command-result.service';
 

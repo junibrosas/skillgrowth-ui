@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -60,7 +59,6 @@ export class CourseFeedComponent implements OnInit, OnDestroy {
         private courseService: CourseService,
         private breadcrumbService: BreadcrumbsService,
         private commandResult: CommandResultService,
-        private router: Router,
         private spinner: NgxSpinnerService,
         private enrollService: EnrollService
     ) {

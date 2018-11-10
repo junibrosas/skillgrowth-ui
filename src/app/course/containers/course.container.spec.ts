@@ -1,4 +1,4 @@
-import { Observable, throwError, of } from 'rxjs';
+import { throwError, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
@@ -19,6 +19,7 @@ import { ICourse } from './../course.types';
 import { ISubject } from './../../subject/subject.types';
 import { ActivatedRouteStub } from './../../testing/activated-route.stub';
 import { RESET_COURSE, SET_COURSE } from './../course.actions';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({ template: '<router-outlet></router-outlet>' })
 class TestBootstrapComponent { }
@@ -50,6 +51,7 @@ describe('Component: CourseComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule,
+                HttpClientModule,
                 StoreModule.forRoot({}),
                 StoreModule.forFeature('common', commonReducer),
                 StoreModule.forFeature('course', courseReducer),
@@ -66,7 +68,7 @@ describe('Component: CourseComponent', () => {
                 { provide: SubjectService, useValue: jasmine.createSpyObj('SubjectService', ['getById']) },
                 { provide: BreadcrumbsService, useValue: jasmine.createSpyObj('BreadcrumbsService', ['store']) },
                 { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService',
-                ['promptSaved', 'promptError', 'promptDeleted']) }
+                ['promptSaved', 'promptError', 'promptDeleted', 'error']) }
             ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
@@ -97,11 +99,11 @@ describe('Component: CourseComponent', () => {
     });
 
     it('should prompt error be called when getSubject() fails.', () => {
-        const serviceSpy = subjectServiceSpy.getById.and.returnValue(throwError('SubjectService test failure.'));
+        subjectServiceSpy.getById.and.returnValue(throwError('SubjectService test failure.'));
 
         component.getSubject();
 
-        expect(commandResultServiceSpy.promptError.calls.any()).toBeTruthy();
+        expect(commandResultServiceSpy.error.calls.any()).toBeTruthy();
     });
 
     it('should execute functions properly on destroy', () => {
@@ -160,7 +162,7 @@ describe('Component: CourseComponent', () => {
         component.onDeleteItem(defaultCourse.id.toString());
 
         expect(spy.calls.any()).toBeTruthy();
-        expect(commandResultServiceSpy.promptError.calls.count()).toBe(1);
+        expect(commandResultServiceSpy.error.calls.count()).toBe(1);
     });
 
     it('should onSubmitted() execute proper methods.', () => {

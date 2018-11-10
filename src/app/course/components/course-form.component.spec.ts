@@ -6,7 +6,6 @@ import { CommandResultService } from './../../common/services/command-result.ser
 import { By } from '@angular/platform-browser';
 
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { DebugElement } from '@angular/core/src/debug/debug_node';
 import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { CourseFormComponent } from './course-form.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -86,9 +85,9 @@ describe('Component: CourseFormComponent', () => {
                 ContentFormHostComponent
             ],
             providers: [
-                { provide: CourseService, useValue: jasmine.createSpyObj('CourseService', ['create', 'update']) },
+                { provide: CourseService, useValue: jasmine.createSpyObj('CourseService', ['create', 'update', 'createOrUpdate']) },
                 { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService',
-                    ['promptSaved', 'promptError', 'promptDeleted'])
+                    ['promptSaved', 'promptDeleted', 'error'])
                 },
             ],
             schemas: [NO_ERRORS_SCHEMA]
@@ -149,7 +148,7 @@ describe('Component: CourseFormComponent', () => {
     });
 
     it('should raise submitted() event when course submitted', () => {
-        const spy = courseServiceSpy.create.and.returnValue(of(defaultCourse));
+        courseServiceSpy.createOrUpdate.and.returnValue(of(defaultCourse));
         let course: ICourse;
 
         component.submitted.subscribe(c => course = c);
@@ -181,12 +180,12 @@ describe('Component: CourseFormComponent', () => {
     });
 
     it('should createOrUpdate() execute error properly', () => {
-        const spy = courseServiceSpy.create.and.returnValue(throwError('Test Failure'));
-        const element = fixture.debugElement.query(By.css('#course-form'));
+        courseServiceSpy.createOrUpdate.and.returnValue(throwError('Test Failure'));
+        fixture.debugElement.query(By.css('#course-form'));
 
         component.createOrUpdate(defaultCourse);
 
-        expect(commandResultServiceSpy.promptError.calls.any()).toBeTruthy();
+        expect(commandResultServiceSpy.error.calls.any()).toBeTruthy();
     });
 
     /**

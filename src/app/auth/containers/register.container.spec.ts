@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +24,8 @@ describe('Component: RegisterComponent', () => {
     let fixture: ComponentFixture<RegisterComponent>;
     let userServiceSpy: jasmine.SpyObj<UserService>;
     let commandResultSpy: jasmine.SpyObj<CommandResultService>;
+    let authServiceSpy: jasmine.SpyObj<AuthService>;
+
     const formData: IRegisteForm = {
         id: '',
         email: 'john@doe.com',
@@ -62,7 +65,8 @@ describe('Component: RegisterComponent', () => {
             ],
             providers: [
                 { provide: UserService, useValue: jasmine.createSpyObj('AuthService', ['create']) },
-                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService', ['promptSaved', 'promptError']) },
+                { provide: AuthService, useValue: jasmine.createSpyObj('AuthService', ['registerUser']) },
+                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService', ['promptSaved', 'promptError']) }
             ],
             declarations: [
                 TestBootstrapComponent,
@@ -75,6 +79,7 @@ describe('Component: RegisterComponent', () => {
     beforeEach(() => {
         userServiceSpy = TestBed.get(UserService);
         commandResultSpy = TestBed.get(CommandResultService);
+        authServiceSpy = TestBed.get(AuthService);
         fixture = TestBed.createComponent(RegisterComponent);
         component = fixture.componentInstance;
         component.ngOnInit();
@@ -94,41 +99,6 @@ describe('Component: RegisterComponent', () => {
         expect(component.form.get('isAgreeTerms').value).toBe(false);
         expect(component.form.get('userType').value).toBe('');
     });
-
-
-    /**
-     * Behavior Testing
-     */
-    // it('should form not valid by default if submitted.', () => {
-    //     let serviceSpy = userServiceSpy.create.and.returnValue(Observable.of(user));
-
-    //     component.submit();
-
-    //     expect(component.form.valid).toBe(false);
-    // });
-
-    // /**
-    //  * Test if form is submitted by triggering element event.
-    //  */
-    // it('should form be valid if has proper form data when submitted.', () => {
-    //     let serviceSpy = userServiceSpy.create.and.returnValue(Observable.of(user));
-
-    //     component.form.patchValue(formData);
-    //     component.submit();
-
-    //     expect(component.form.valid).toBe(true);
-    // });
-
-    // it('should call service.loginUser() if form is submitted and valid.', () => {
-    //     let serviceSpy = userServiceSpy.create.and.returnValue(Observable.of(user));
-
-    //     component.form.patchValue(formData);
-    //     component.submit();
-
-    //     expect(userServiceSpy.create.calls.count()).toBe(1, 'spy method was called once');
-    //     expect(userServiceSpy.create.calls.first().args[0].firstname).toBe(formData.firstname);
-    //     expect(userServiceSpy.create.calls.first().args[0].lastname).toBe(formData.lastname);
-    // });
 
     it('should getter firstname returns correct value.', () => {
         component.form.patchValue(formData);
@@ -165,32 +135,4 @@ describe('Component: RegisterComponent', () => {
         component.form.patchValue(formData);
         expect(component.userType.value).toBe(formData.userType);
     });
-
-    // it('should have correct navigation url when register successfully.', () => {
-    //     let serviceSpy = userServiceSpy.create.and.returnValue(Observable.of(user));
-    //     let routerSpy = spyOn((<any>component).router, 'navigateByUrl');
-
-    //     component.form.patchValue(formData);
-    //     component.submit();
-
-    //     expect(routerSpy.calls.first().args[0]).toBe('auth/login');
-    // });
-
-    // it('should display success when register successfully.', () => {
-    //     let serviceSpy = userServiceSpy.create.and.returnValue(Observable.of(user));
-
-    //     component.form.patchValue(formData);
-    //     component.submit();
-
-    //     expect(commandResultSpy.promptSaved.calls.first().args[0]).toBe('Registration successful');
-    // });
-
-    // it('should display error when registration fails', () => {
-    //     let serviceSpy = userServiceSpy.create.and.returnValue(new ErrorObservable('UserService test failure'));
-
-    //     component.form.patchValue(formData);
-    //     component.submit();
-
-    //     expect(commandResultSpy.promptError.calls.first().args[0]).toBe('UserService test failure');
-    // });
 });

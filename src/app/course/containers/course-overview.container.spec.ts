@@ -1,3 +1,4 @@
+import { EnrollService } from './../../common/services/enroll.service';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
@@ -30,8 +31,8 @@ class TestComponent { }
 describe('Component: CourseOverviewComponent', () => {
     let component: CourseOverviewComponent;
     let fixture: ComponentFixture<CourseOverviewComponent>;
-    let courseServiceSpy: jasmine.SpyObj<CourseService>;
     let commandResultServiceSpy: jasmine.SpyObj<CommandResultService>;
+    let enrollServiceSpy: jasmine.SpyObj<EnrollService>;
     const mockActivatedRoute: ActivatedRouteStub = new ActivatedRouteStub();
     let store: Store<AppState>;
     const defaultCourse: ICourse = {
@@ -68,8 +69,8 @@ describe('Component: CourseOverviewComponent', () => {
             providers: [
                 { provide: ActivatedRoute, useValue: mockActivatedRoute },
                 { provide: BreadcrumbsService, useValue: jasmine.createSpyObj('BreadcrumbsService', ['store']) },
-                { provide: CourseService, useValue: jasmine.createSpyObj('CourseService', ['getByIdAndPublished', 'enrollCourseByUser']) },
-                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService', ['promptError']) }
+                { provide: CommandResultService, useValue: jasmine.createSpyObj('CommandResultService', ['error']) },
+                { provide: EnrollService, useValue: jasmine.createSpyObj('EnrollService', ['getByIdAndPublished', 'enrollCourseByUser'])}
             ],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
@@ -77,8 +78,8 @@ describe('Component: CourseOverviewComponent', () => {
 
     beforeEach(() => {
         store = TestBed.get(Store);
-        courseServiceSpy = TestBed.get(CourseService);
         commandResultServiceSpy = TestBed.get(CommandResultService);
+        enrollServiceSpy = TestBed.get(EnrollService);
         fixture = TestBed.createComponent(CourseOverviewComponent);
         component = fixture.componentInstance;
     });
@@ -93,7 +94,7 @@ describe('Component: CourseOverviewComponent', () => {
     });
 
     it('should ngOnInit() call getCourse()', () => {
-        const serviceSpy = courseServiceSpy.getByIdAndPublished.and.returnValue(of(defaultCourse));
+        enrollServiceSpy.getByIdAndPublished.and.returnValue(of(defaultCourse));
         const componentSpy = spyOn(component, 'getCourse');
 
         component.ngOnInit();
@@ -102,7 +103,7 @@ describe('Component: CourseOverviewComponent', () => {
     });
 
     it('should getCourse() call course service getByIdAndPublished() and call proper methods from success callback.', () => {
-        const serviceSpy = courseServiceSpy.getByIdAndPublished.and.returnValue(of({ course: defaultCourse, isEnrolled: true }));
+        const serviceSpy = enrollServiceSpy.getByIdAndPublished.and.returnValue(of({ course: defaultCourse, isEnrolled: true }));
         const storeSpy = spyOn(store, 'dispatch');
 
         mockActivatedRoute.setParamMap({ id: defaultCourse.id });
@@ -121,16 +122,15 @@ describe('Component: CourseOverviewComponent', () => {
     });
 
     it('should getCourse() call course service getByIdAndPublished() and call proper methods from error callback.', () => {
-        const serviceSpy = courseServiceSpy.getByIdAndPublished.and.returnValue(throwError('Test Failure'));
+        enrollServiceSpy.getByIdAndPublished.and.returnValue(throwError('Test Failure'));
 
         component.getCourse();
 
-        expect(serviceSpy.calls.count()).toEqual(1);
-        expect(commandResultServiceSpy.promptError.calls.count()).toEqual(1);
+        expect(commandResultServiceSpy.error.calls.count()).toEqual(1);
     });
 
     it('should enrollCourse() call course service enrollCourseByUser() and call proper methods from success callback', () => {
-        const serviceSpy = courseServiceSpy.enrollCourseByUser.and.returnValue(of({ course: defaultCourse, isEnrolled: true }));
+        enrollServiceSpy.enrollCourseByUser.and.returnValue(of({ course: defaultCourse, isEnrolled: true }));
 
         component.enrollCourse(defaultCourse.id.toString());
 
@@ -138,11 +138,11 @@ describe('Component: CourseOverviewComponent', () => {
     });
 
     it('should enrollCourse() call course service enrollCourseByUser() and call proper methods from error callback', () => {
-        const serviceSpy = courseServiceSpy.enrollCourseByUser.and.returnValue(throwError('Test Failure'));
+        enrollServiceSpy.enrollCourseByUser.and.returnValue(throwError('Test Failure'));
 
         component.enrollCourse(defaultCourse.id.toString());
 
-        expect(commandResultServiceSpy.promptError.calls.count()).toEqual(1);
+        expect(commandResultServiceSpy.error.calls.count()).toEqual(1);
     });
 
     it('should viewModule() have correct navigation url', () => {

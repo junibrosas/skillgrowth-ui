@@ -7,7 +7,6 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { AppState } from '../../common/reducers/index';
 import { SET_COURSE } from './../course.actions';
-import { CourseService } from './../course.service';
 import { ICourse } from './../course.types';
 import { IModule } from './../../module/module.types';
 import { BreadcrumbsService } from '../../common/components/breadcrumbs/breadcrumbs.service';
@@ -84,7 +83,6 @@ export class CourseOverviewComponent implements OnInit, OnDestroy {
     constructor(
         private store: Store<AppState>,
         private breadcrumbService: BreadcrumbsService,
-        private courseService: CourseService,
         private commandResult: CommandResultService,
         private route: ActivatedRoute,
         public router: Router,
