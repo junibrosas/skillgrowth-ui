@@ -1,5 +1,5 @@
-import { IUser } from './../../user/user.types';
-import { getDefaultUser } from './../../user/user.reducer';
+import { IUser } from './../../dashboard/user/user.types';
+import { getDefaultUser } from './../../dashboard/user/user.reducer';
 
 import {
     SessionActionTypes,

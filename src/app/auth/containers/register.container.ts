@@ -11,68 +11,70 @@ import { CommandResultService } from '../../common/services/command-result.servi
 @Component({
     selector: 'app-register',
     styles: [],
-    template: `<mat-card>
-        <div>
-            <p class="text-center">SIGN UP</p>
-            <p class="text-muted text-center">
-                <small>Start your free 30-day trial now.</small>
-            </p>
-        </div>
-        <form id="register-form" [formGroup]="form" novalidate="novalidate" (ngSubmit)="submit()" #f="ngForm">
-            <div class="row">
-                <mat-form-field class="form-group col-md-6">
-                    <input matInput placeholder="First name" formControlName="firstname" />
-                    <mat-error *ngIf="firstname.hasError('required')">First name is required</mat-error>
-                </mat-form-field>
-                <mat-form-field class="form-group col-md-6">
-                    <input matInput placeholder="Last name" formControlName="lastname" />
-                    <mat-error *ngIf="lastname.hasError('required')">Last name is required</mat-error>
-                </mat-form-field>
+    template: `<app-auth-layout>
+        <mat-card>
+            <div>
+                <p class="text-center">SIGN UP</p>
+                <p class="text-muted text-center">
+                    <small>Start your free 30-day trial now.</small>
+                </p>
             </div>
-            <mat-form-field class="form-group full-width">
-                <input matInput placeholder="Email" formControlName="email" />
-                <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">Please enter a valid email address</mat-error>
-                <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
-            </mat-form-field>
-            <div class="row">
-                <mat-form-field class="form-group col-md-6">
-                    <input matInput type="password" placeholder="Password" required formControlName="password" />
-                    <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
-                    Password should be at least 6 digits</mat-error>
-                    <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+            <form id="register-form" [formGroup]="form" novalidate="novalidate" (ngSubmit)="submit()" #f="ngForm">
+                <div class="row">
+                    <mat-form-field class="form-group col-md-6">
+                        <input matInput placeholder="First name" formControlName="firstname" />
+                        <mat-error *ngIf="firstname.hasError('required')">First name is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-group col-md-6">
+                        <input matInput placeholder="Last name" formControlName="lastname" />
+                        <mat-error *ngIf="lastname.hasError('required')">Last name is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <mat-form-field class="form-group full-width">
+                    <input matInput placeholder="Email" formControlName="email" />
+                    <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">Please enter a valid email address</mat-error>
+                    <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
                 </mat-form-field>
-                <mat-form-field class="form-group col-md-6">
-                    <input matInput type="password" placeholder="Confirm password" required formControlName="confirmPassword" />
-                    <mat-error *ngIf="confirmPassword.hasError('matchPassword') && !password.hasError('required')">
-                    Password should be matched</mat-error>
-                    <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required</mat-error>
-                </mat-form-field>
-                <mat-form-field class="form-group full-width fixed-group">
-                    <mat-select placeholder="Choose user type" formControlName="userType">
-                        <mat-option *ngFor="let type of userTypes; trackBy: trackByFn" [value]="type.value">
-                        {{ type.label }}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="userType.hasError('required')">User type is required</mat-error>
-                </mat-form-field>
-                <div class="form-group fixed-group with-error">
-                    <div class="row ">
-                        <div class="col-md-12 ">
-                            <mat-checkbox formControlName="isAgreeTerms">Agree the terms and policy</mat-checkbox>
-                            <mat-error *ngIf="f.submitted && isAgreeTerms.hasError('required')">
-                            You must agree to the terms and policy</mat-error>
+                <div class="row">
+                    <mat-form-field class="form-group col-md-6">
+                        <input matInput type="password" placeholder="Password" required formControlName="password" />
+                        <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+                        Password should be at least 6 digits</mat-error>
+                        <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-group col-md-6">
+                        <input matInput type="password" placeholder="Confirm password" required formControlName="confirmPassword" />
+                        <mat-error *ngIf="confirmPassword.hasError('matchPassword') && !password.hasError('required')">
+                        Password should be matched</mat-error>
+                        <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-group full-width fixed-group">
+                        <mat-select placeholder="Choose user type" formControlName="userType">
+                            <mat-option *ngFor="let type of userTypes; trackBy: trackByFn" [value]="type.value">
+                            {{ type.label }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="userType.hasError('required')">User type is required</mat-error>
+                    </mat-form-field>
+                    <div class="form-group fixed-group with-error">
+                        <div class="row ">
+                            <div class="col-md-12 ">
+                                <mat-checkbox formControlName="isAgreeTerms">Agree the terms and policy</mat-checkbox>
+                                <mat-error *ngIf="f.submitted && isAgreeTerms.hasError('required')">
+                                You must agree to the terms and policy</mat-error>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="martop-20">
-                <button mat-raised-button color="primary" class="full-width martop-20">Sign up</button>
-            </div>
-            <div class="text-center martop-20">
-                <span>Already have an account?</span> <a class="pull-left" [routerLink]="'/auth/login'"> Login!</a>
-            </div>
-        </form>
-    </mat-card>`
+                <div class="martop-20">
+                    <button mat-raised-button color="primary" class="full-width martop-20">Sign up</button>
+                </div>
+                <div class="text-center martop-20">
+                    <span>Already have an account?</span> <a class="pull-left" [routerLink]="'/auth/login'"> Login!</a>
+                </div>
+            </form>
+        </mat-card>
+    </app-auth-layout>`
 })
 
 export class RegisterComponent implements OnInit {

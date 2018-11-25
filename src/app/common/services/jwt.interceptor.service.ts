@@ -1,8 +1,8 @@
-import { IAuthToken } from './../../user/user.types';
+import { IAuthToken } from './../../dashboard/user/user.types';
 import { Injectable, Injector } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUser } from '../../user/user.types';
+import { IUser } from '../../dashboard/user/user.types';
 import { Router } from '@angular/router';
 import { catchError, filter, take, switchMap, finalize } from 'rxjs/operators';
 import { throwError } from 'rxjs';

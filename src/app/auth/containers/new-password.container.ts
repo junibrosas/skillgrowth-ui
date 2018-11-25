@@ -10,7 +10,7 @@ import { PasswordValidation } from '../../common/validations/password.validation
 @Component({
     selector: 'app-new-password',
     styles: [],
-    template: `<mat-card>
+    template: `<app-auth-layout><mat-card>
         <div *ngIf="!isTokenInvalid">
             <p class="text-center">RESET PASSWORD</p>
             <p class="text-muted text-center">
@@ -43,7 +43,7 @@ import { PasswordValidation } from '../../common/validations/password.validation
             </div>
         </form>
         <div class="alert alert-danger" *ngIf="isTokenInvalid">Opps! Password reset token is invalid or has expired.</div>
-    </mat-card>`
+    </mat-card></app-auth-layout>`
 })
 
 export class NewPasswordComponent implements OnInit {

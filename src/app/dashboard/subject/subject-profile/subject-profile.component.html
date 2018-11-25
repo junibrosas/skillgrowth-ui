@@ -1,0 +1,16 @@
+<app-layout-admin>
+    <form id="subject-editor-form" (ngSubmit)="submit(); form.valid ? f.resetForm() : null" [formGroup]="form" #f="ngForm">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field class="form-group full-width">
+                    <input matInput placeholder="Subject Name" formControlName="name" />
+                    <mat-error *ngIf="f.submitted && name.hasError('required')">Title is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <button mat-raised-button>{{buttonLabel}}</button>
+                <button type="button" (click)="onReset()" mat-raised-button>{{buttonCancelLabel}}</button>
+            </div>
+        </div>
+    </form>
+</app-layout-admin>

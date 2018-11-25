@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { RequestBase } from '../common/services/request-base';
-import { IUser } from './../user/user.types';
+import { IUser } from './../dashboard/user/user.types';
 import { ILoginForm, IResetTokenPayload, IActivateUserPayload } from './auth.types';
 import { environment } from '../../environments/environment';
 

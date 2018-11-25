@@ -1,28 +1,15 @@
-<div class="container">
-    <mat-toolbar class="no-bg-color top-nav">
-        <mat-toolbar-row>
-            <span class="company-name">E-learning Platform</span>
-            <div *ngIf="isAdministrator">
-                <button (click)="routeToSubjects()" mat-icon-button><mat-icon>library_books</mat-icon></button>
-                <button (click)="routeToUsers()" mat-icon-button><mat-icon>group</mat-icon></button>
+<mat-toolbar class="navbar">
+    <mat-toolbar-row>
+        <a [routerLink]="''" class="company">E-learning Platform</a>
+        <div class="links">
+            <div *ngIf="currentUser">
+                <span class="example-spacer"></span>
+                <a mat-button [routerLink]="'/auth/login'">Logout</a>
             </div>
-            <span class="example-spacer"></span>
-            <div class="top-nav-user">
-                <div class="top-nav-user-name">{{ fullName }}</div>
-                <div class="top-nav-user-type">{{ currentUser.userType }}</div>
+            <div *ngIf="!currentUser">
+                <span class="example-spacer"></span>
+                <a [routerLink]="'/auth/login'">Login</a>
             </div>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-menu #userMenu="matMenu">
-                <button [routerLink]="'/user/'+currentUser.id" mat-menu-item>Profile</button>
-                <button [routerLink]="'/auth/login'" mat-menu-item>Logout</button>
-            </mat-menu>
-            <button mat-icon-button [matMenuTriggerFor]="userMenu">
-                <mat-icon>keyboard_arrow_down</mat-icon>
-            </button>
-        </mat-toolbar-row>
-    </mat-toolbar>
-    <!-- TODO: Disable activation temporarily -->
-    <!-- <div *ngIf="!currentUser.active" class="alert alert-warning">
-        Please check your email address for your account activation code. Activate your account within an hour upon your registration.
-    </div> -->
-</div>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

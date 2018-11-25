@@ -1,0 +1,14 @@
+<app-layout-admin>
+  <app-content *ngIf="course$ | async as course">
+      <app-course-form
+          [subjectId]="subjectId"
+          [course]="course"
+          (submitted)="onSubmitted($event)"
+          (reset)="onReset()"></app-course-form>
+      <h5>Courses</h5>
+      <app-list-grid
+          (selectedItem)="onSelectItem($event)"
+          (editItem)="onEditItem($event)"
+          (deleteItem)="onDeleteItem($event)"></app-list-grid>
+  </app-content>
+</app-layout-admin>

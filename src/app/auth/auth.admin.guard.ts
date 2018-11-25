@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 
 import { USER_ADMIN } from './auth.constants';
-import { IUser } from './../user/user.types';
+import { IUser } from './../dashboard/user/user.types';
 
 @Injectable()
 export class AuthAdminGuard implements CanActivate {

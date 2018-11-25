@@ -8,9 +8,9 @@ import { CommandResultService } from './../../common/services/command-result.ser
 @Component({
     selector: 'app-activate-user',
     styles: [],
-    template: `<mat-card>
+    template: `<app-auth-layout><mat-card>
         Please wait for your account verification response.
-    </mat-card>`
+    </mat-card></app-auth-layout>`
 })
 
 export class ActivateUserComponent implements OnInit {

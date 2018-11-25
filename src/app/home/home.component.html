@@ -1,0 +1,17 @@
+<app-layout-admin>
+    <div class="section" *ngIf="courses$ | async as courses">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>All Courses</h5>
+            </div>
+            <div class="col-md-3">
+                <app-course-search (whenTypeAhead)="onSearchResponse($event)"></app-course-search>
+            </div>
+            <div class="col-md-3">
+                <app-course-filter (selected)="onFilterChange($event)">
+                </app-course-filter>
+            </div>
+        </div>
+        <app-course-feed-list [courses]="courses"></app-course-feed-list>
+    </div>
+</app-layout-admin>

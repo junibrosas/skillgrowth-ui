@@ -1,6 +1,6 @@
 import { environment } from './../../../environments/environment';
 import { AppState } from './index';
-import { CourseState } from './../../course/course.reducer';
+import { CourseState } from './../../dashboard/course/course.reducer';
 import { StoreModule, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { Params, RouterStateSnapshot } from '@angular/router';
 import { compose } from '@ngrx/store';
@@ -9,11 +9,11 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { storeLogger } from 'ngrx-store-logger';
 import { routerReducer, RouterReducerState, RouterStateSerializer } from '@ngrx/router-store';
 
-import { userReducer, UserState } from '../../user/user.reducer';
+import { userReducer, UserState } from '../../dashboard/user/user.reducer';
 import { commonReducer, CommonState } from './common.reducer';
-import { moduleReducer, ModuleState } from '../../module/module.reducer';
-import { courseReducer } from '../../course/course.reducer';
-import { subjectReducer, SubjectState } from '../../subject/subject.reducer';
+import { moduleReducer, ModuleState } from '../../dashboard/module/module.reducer';
+import { courseReducer } from '../../dashboard/course/course.reducer';
+import { subjectReducer, SubjectState } from '../../dashboard/subject/subject.reducer';
 import { sessionReducer, SessionState } from './session.reducer';
 
 export interface RouterStateUrl {

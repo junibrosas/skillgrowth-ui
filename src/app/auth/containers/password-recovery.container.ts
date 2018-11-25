@@ -8,7 +8,8 @@ import { AuthService } from '../auth.service';
 @Component({
     selector: 'app-password-recovery',
     styles: [],
-    template: `<mat-card>
+    template: `<app-auth-layout>
+    <mat-card>
         <div *ngIf="!isSent">
             <p class="text-center">PASSWORD RECOVER</p>
             <p class="text-muted text-center">
@@ -37,7 +38,8 @@ import { AuthService } from '../auth.service';
                 <a class="pull-left" [routerLink]="'/auth/login'">Return to Login</a>
             </div>
         </form>
-    </mat-card>`
+    </mat-card>
+    </app-auth-layout>`
 })
 
 export class PasswordRecoveryComponent {

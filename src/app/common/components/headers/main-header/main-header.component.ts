@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { IUser } from './../../../../user/user.types';
+import { IUser } from './../../../../dashboard/user/user.types';
 import { AppState } from './../../../reducers/index';
 import { USER_ADMIN } from '../../../../auth/auth.constants';
 
 @Component({
     selector: 'app-main-header',
-    styles: [],
+    styleUrls: ['./main-header.component.scss'],
     templateUrl: './main-header.component.html'
 })
 
@@ -26,18 +26,18 @@ export class MainHeaderComponent {
     }
 
     routeToSubjects() {
-        this.router.navigate(['/subject']);
+        this.router.navigate(['/dashboard/subject']);
     }
 
     routeToUsers() {
-        this.router.navigate(['/user']);
+        this.router.navigate(['/dashboard/user']);
     }
 
     get fullName() {
         return `${this.currentUser.profile.firstname} ${this.currentUser.profile.lastname}`;
     }
 
-    get isAdministrator() {
-        return this.currentUser.userType === USER_ADMIN;
-    }
+    // get isAdministrator() {
+    //     return this.currentUser.userType === USER_ADMIN;
+    // }
 }

@@ -1,0 +1,26 @@
+.navbar {
+    background-color: transparent;
+    padding: 0;
+
+    mat-toolbar-row {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.links {
+    a {
+        font-size: 14px;
+    }
+}
+
+.company {
+    color: inherit;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 0;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}

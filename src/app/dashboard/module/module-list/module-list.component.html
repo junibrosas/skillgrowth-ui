@@ -1,0 +1,15 @@
+<app-layout-admin>
+    <app-content>
+        <div class="mb-20">
+            <button mat-raised-button [routerLink]="['/dashboard/module']" [queryParams]="{ courseId: courseId }">
+                <mat-icon>add</mat-icon>
+                Add New Module
+            </button>
+        </div>
+        <h5>Modules</h5>
+        <app-list-grid
+            (selectedItem)="onSelectItem($event)"
+            (editItem)="onEditItem($event)"
+            (deleteItem)="onDeleteItem($event)"></app-list-grid>
+    </app-content>
+</app-layout-admin>

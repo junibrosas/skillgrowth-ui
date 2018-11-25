@@ -1,0 +1,33 @@
+<app-layout-admin>
+  <app-content>
+    <div class="lesson-resume mb-40" *ngIf="false">
+        <span class="subtitle">Resume your current lesson</span>
+        <h5 class="title">
+            Angular 5:
+            <span>Changing Pages with Routing</span>
+        </h5>
+    </div>
+    <div class="section" *ngIf="userCourses$ | async as userCourses">
+        <h5>Your Courses</h5>
+        <app-course-feed-list [courses]="userCourses">
+        </app-course-feed-list>
+    </div>
+    <div class="section" *ngIf="courses$ | async as courses">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>All Courses</h5>
+            </div>
+            <div class="col-md-3">
+                <app-course-search (whenTypeAhead)="onSearchResponse($event)">
+                </app-course-search>
+            </div>
+            <div class="col-md-3">
+                <app-course-filter (selected)="onFilterChange($event)">
+                </app-course-filter>
+            </div>
+        </div>
+        <app-course-feed-list [courses]="courses">
+        </app-course-feed-list>
+    </div>
+  </app-content>
+</app-layout-admin>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 
-import { IUser } from './../user/user.types';
+import { IUser } from './../dashboard/user/user.types';
 import { USER_LEARNER } from './auth.constants';
 
 @Injectable()

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 import { AppState } from '../../reducers/index';
-import { IUser } from '../../../user/user.types';
+import { IUser } from '../../../dashboard/user/user.types';
 import { Subject, Observable } from 'rxjs';
 import { USER_CONTRIBUTOR, USER_LEARNER } from '../../../auth/auth.constants';
 import { UserTypes } from './../../../auth/auth.types';
@@ -98,9 +98,9 @@ export class MainSidebarComponent implements OnInit {
             case USER_CONTRIBUTOR:
                 return [
                     {
-                        label: 'Module Manager', icon: 'fa fa-th-large', link: '/module', children: [
-                            { label: 'Courses', icon: '', link: '/course', children: [] },
-                            { label: 'Subjects', icon: '', link: '/subject', children: [] }
+                        label: 'Module Manager', icon: 'fa fa-th-large', link: '/dashboard/module', children: [
+                            { label: 'Courses', icon: '', link: '/dashboard/course', children: [] },
+                            { label: 'Subjects', icon: '', link: '/dashboard/subject', children: [] }
                         ]
                     },
                     { label: 'Users', icon: 'fa fa-user', link: '/user', children: [] }
@@ -108,7 +108,7 @@ export class MainSidebarComponent implements OnInit {
 
             case USER_LEARNER:
                 return [
-                    { label: 'Courses', icon: 'fa fa-book', link: '/course/feed', children: [] }
+                    { label: 'Courses', icon: 'fa fa-book', link: '/dashboard/course/feed', children: [] }
                 ];
 
             default:

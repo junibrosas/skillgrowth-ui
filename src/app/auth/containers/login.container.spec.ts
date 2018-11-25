@@ -10,7 +10,7 @@ import { LoginComponent } from './login.container';
 import { AuthService } from '../auth.service';
 import { CommandResultService } from '../../common/services/command-result.service';
 import { ILoginForm } from './../auth.types';
-import { IUser } from '../../user/user.types';
+import { IUser } from '../../dashboard/user/user.types';
 import { USER_LEARNER, USER_CONTRIBUTOR, USER_ADMIN } from './../auth.constants';
 
 @Component({ template: '<router-outlet></router-outlet>' })
@@ -122,11 +122,11 @@ describe('Container: LoginContainer', () => {
     });
 
     it('should have correct returned url if user is a Learner.', () => {
-        expect(component.getReturnUrl(USER_LEARNER)).toBe('/course/feed');
+        expect(component.getReturnUrl(USER_LEARNER)).toBe('/dashboard/course/feed');
     });
 
     it('should have correct returned url if user is a Contributor.', () => {
-        expect(component.getReturnUrl(USER_CONTRIBUTOR)).toBe('/subject');
+        expect(component.getReturnUrl(USER_CONTRIBUTOR)).toBe('/dashboard/subject');
     });
 
     it('should have correct returned url if user is a Administrator.', () => {
@@ -153,7 +153,7 @@ describe('Container: LoginContainer', () => {
         component.form.patchValue(loginData);
         component.submit();
 
-        expect(routerSpy.calls.first().args[0]).toBe('/course/feed');
+        expect(routerSpy.calls.first().args[0]).toBe('/dashboard/course/feed');
     });
 
     it('should display error when AuthService fails', () => {
