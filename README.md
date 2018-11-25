@@ -14,8 +14,6 @@ Checkout the api used for this project on a separate [repository](https://github
 - Angular Toaster
 - Jasmine
 
-# ElearningAngular
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
