@@ -2,7 +2,11 @@
 
 Elearning Platform is an application where learners can enroll to courses and contributors can create modules and courses. This project serves as a playground to learn more about Angular and other frontend technologies. This project is still on going and cool new features like PWA, etc, will be added.
 
-Checkout the api used for this project on a separate [repository](https://github.com/junibrosas/elearning-api).
+# Setting Up
+- clone this repository.
+- run `yarn install` to install dependencies.
+- run `npm run start` to start the dev server and run the application locally.
+- check out the api used for this project on a separate [repository](https://github.com/junibrosas/elearning-api).
 
 # Features
 - Angular 7
